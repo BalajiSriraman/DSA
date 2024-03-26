@@ -29,6 +29,38 @@ void addNode(Node*& head, int newData){
   }
 }
 
+// Function to delete a node with a specific value from the linked list
+void deleteNode(Node*& head, int value) {
+    // If the list is empty, return
+    if (head == nullptr)
+        return;
+
+    // If the node to be deleted is the head node
+    if (head->data == value) {
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+        return;
+    }
+
+    // Traverse the list to find the node with the given value and its previous node
+    Node* prev = nullptr;
+    Node* current = head;
+    while (current != nullptr && current->data != value) {
+        prev = current;
+        current = current->next;
+    }
+
+    // If the value is not found in the list
+    if (current == nullptr)
+        return;
+
+    // Unlink the node from the list and delete it
+    prev->next = current->next;
+    delete current;
+}
+
+
 void printList(Node* head) {
     Node* temp = head;
     while (temp != nullptr) {
